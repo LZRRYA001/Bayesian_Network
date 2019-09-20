@@ -1,0 +1,304 @@
+// ~->[DNET-1]->~
+
+// File created by an unlicensed user using Netica 6.05 on Sep 20, 2019 at 07:26:12 UTC.
+
+bnet Network {
+autoupdate = TRUE;
+whenchanged = 1568964363;
+
+visual V1 {
+	defdispform = BELIEFBARS;
+	nodelabeling = TITLE;
+	NodeMaxNumEntries = 50;
+	nodefont = font {shape= "Arial"; size= 9;};
+	linkfont = font {shape= "Arial"; size= 9;};
+	ShowLinkStrengths = 1;
+	windowposn = (22, 22, 1418, 655);
+	resolution = 72;
+	drawingbounds = (1372, 720);
+	showpagebreaks = FALSE;
+	usegrid = TRUE;
+	gridspace = (6, 6);
+	NodeSet Node {BuiltIn = 1; Color = 0x00e1e1e1;};
+	NodeSet Nature {BuiltIn = 1; Color = 0x00f8eed2;};
+	NodeSet Deterministic {BuiltIn = 1; Color = 0x00d3caa6;};
+	NodeSet Finding {BuiltIn = 1; Color = 0x00c8c8c8;};
+	NodeSet Constant {BuiltIn = 1; Color = 0x00ffffff;};
+	NodeSet ConstantValue {BuiltIn = 1; Color = 0x00ffffb4;};
+	NodeSet Utility {BuiltIn = 1; Color = 0x00ffbdbd;};
+	NodeSet Decision {BuiltIn = 1; Color = 0x00dee8ff;};
+	NodeSet Documentation {BuiltIn = 1; Color = 0x00f0fafa;};
+	NodeSet Title {BuiltIn = 1; Color = 0x00ffffff;};
+	NodeSet Supervisors {Color = 0x00f0eaa0;};
+	NodeSet Topics {Color = 0x00a0ecf0;};
+	NodeSet Subtopics {Color = 0x00baf7ba;};
+	PrinterSetting A {
+		margins = (1270, 1270, 1270, 1270);
+		};
+	};
+
+node A {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	parents = ();
+	title = "logic, ontologies and causal networks, knowledge based systems";
+	whenchanged = 1568964284;
+	visual V1 {
+		center = (366, 216);
+		height = 12;
+		};
+	};
+
+node C {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	parents = ();
+	title = "top down AI";
+	whenchanged = 1568964289;
+	visual V1 {
+		center = (102, 252);
+		height = 11;
+		};
+	};
+
+node B {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	parents = ();
+	title = "Representing and reasoning with expert knowledge";
+	whenchanged = 1568964298;
+	visual V1 {
+		center = (150, 138);
+		height = 6;
+		};
+	};
+
+node KRR {
+	discrete = TRUE;
+	statetitles = ("Interested", "Not_Interested");
+	kind = NATURE;
+	parents = (A, C, B);
+	title = "Knowledge representation and reasoning";
+	whenchanged = 1568962409;
+	visual V1 {
+		center = (396, 330);
+		height = 9;
+		link 1 {
+			path = ((374, 250), (389, 304));
+			};
+		link 2 {
+			path = ((204, 279), (296, 304));
+			};
+		};
+	};
+
+node G {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	parents = ();
+	title = "bottom-up AI";
+	whenchanged = 1568964275;
+	visual V1 {
+		center = (366, 60);
+		height = 5;
+		};
+	};
+
+node E {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	parents = ();
+	title = "building classification & predictive models from labelled historical data";
+	whenchanged = 1568964269;
+	visual V1 {
+		center = (624, 126);
+		height = 13;
+		};
+	};
+
+node F {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	parents = ();
+	title = "finding structure or patterns in unlabelled data";
+	whenchanged = 1568964236;
+	visual V1 {
+		center = (924, 150);
+		height = 3;
+		};
+	};
+
+node D {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	parents = ();
+	title = "artificial neural networks, clustering techniques";
+	whenchanged = 1568964262;
+	visual V1 {
+		center = (816, 54);
+		height = 4;
+		};
+	};
+
+node ML {
+	discrete = TRUE;
+	statetitles = ("Interested", "Not_Interested");
+	kind = NATURE;
+	parents = (G, E, F, D);
+	title = "Machine learning & pattern recognition ";
+	whenchanged = 1568962395;
+	visual V1 {
+		center = (672, 330);
+		height = 7;
+		};
+	};
+
+node K {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	parents = ();
+	title = "models for action/path selection in complex environments";
+	whenchanged = 1568964230;
+	visual V1 {
+		center = (1224, 210);
+		height = 2;
+		};
+	};
+
+node J {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	parents = ();
+	title = "reinforcement learning (RL) & Markov decision processes";
+	whenchanged = 1568964254;
+	visual V1 {
+		center = (1170, 84);
+		height = 1;
+		};
+	};
+
+node L_and_P {
+	discrete = TRUE;
+	statetitles = ("Interested", "Not_Interested");
+	kind = NATURE;
+	parents = (K, J);
+	title = "Learning & planning";
+	whenchanged = 1568962416;
+	visual V1 {
+		center = (918, 330);
+		height = 8;
+		link 1 {
+			path = ((1141, 244), (985, 304));
+			};
+		};
+	};
+
+node H {
+	discrete = TRUE;
+	states = (Prof_Deshen_Moodley, Prof_Geoff_Nitschke, Prof_Maria_Keet, Prof_Tommie_Meyer, Prof_Hussein_Suleman, Cannot_Supervise);
+	kind = NATURE;
+	parents = (KRR, ML, L_and_P);
+	title = "Supervisors";
+	whenchanged = 1568962348;
+	visual V1 {
+		center = (666, 492);
+		height = 10;
+		};
+	};
+
+node NOTE18 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Supervisors";
+	whenchanged = 1568964363;
+	visual V1 {
+		center = (1218, 498);
+		dispform = LABELBOX;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 19;
+		};
+	};
+
+node NOTE15 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Topics";
+	whenchanged = 1568964358;
+	visual V1 {
+		center = (1203, 474);
+		dispform = LABELBOX;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 16;
+		};
+	};
+
+node NOTE12 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Diseases";
+	whenchanged = 1084337466;
+	visual V1 {
+		center = (1152, 474);
+		dispform = SHAPE;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 15;
+		};
+	};
+
+node NOTE17 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Diseases";
+	whenchanged = 1084337466;
+	visual V1 {
+		center = (1152, 498);
+		dispform = SHAPE;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 17;
+		};
+	};
+
+node NOTE14 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Subtopics";
+	whenchanged = 1568964351;
+	visual V1 {
+		center = (1212, 450);
+		dispform = LABELBOX;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 18;
+		};
+	};
+
+node NOTE11 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Contributing Factors";
+	whenchanged = 1084339137;
+	visual V1 {
+		center = (1152, 450);
+		dispform = SHAPE;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 14;
+		};
+	};
+NodeSet Supervisors {Nodes = (H, NOTE17);};
+NodeSet Topics {Nodes = (ML, L_and_P, KRR, NOTE12);};
+NodeSet Subtopics {Nodes = (J, K, F, D, E, G, B, C, A, NOTE11);};
+};
