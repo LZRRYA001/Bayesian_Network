@@ -1,10 +1,10 @@
 // ~->[DNET-1]->~
 
-// File created by an unlicensed user using Netica 6.05 on Sep 20, 2019 at 07:26:12 UTC.
+// File created by an unlicensed user using Netica 6.05 on Sep 27, 2019 at 11:30:19 UTC.
 
 bnet Network {
 autoupdate = TRUE;
-whenchanged = 1568964363;
+whenchanged = 1569583785;
 
 visual V1 {
 	defdispform = BELIEFBARS;
@@ -69,7 +69,7 @@ node B {
 	kind = NATURE;
 	parents = ();
 	title = "Representing and reasoning with expert knowledge";
-	whenchanged = 1568964298;
+	whenchanged = 1569583424;
 	visual V1 {
 		center = (150, 138);
 		height = 6;
@@ -101,7 +101,7 @@ node G {
 	kind = NATURE;
 	parents = ();
 	title = "bottom-up AI";
-	whenchanged = 1568964275;
+	whenchanged = 1569583400;
 	visual V1 {
 		center = (366, 60);
 		height = 5;
@@ -160,26 +160,26 @@ node ML {
 		};
 	};
 
-node K {
+node I {
 	discrete = TRUE;
 	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
 	kind = NATURE;
 	parents = ();
 	title = "models for action/path selection in complex environments";
-	whenchanged = 1568964230;
+	whenchanged = 1569583685;
 	visual V1 {
 		center = (1224, 210);
 		height = 2;
 		};
 	};
 
-node J {
+node H {
 	discrete = TRUE;
 	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
 	kind = NATURE;
 	parents = ();
 	title = "reinforcement learning (RL) & Markov decision processes";
-	whenchanged = 1568964254;
+	whenchanged = 1569583785;
 	visual V1 {
 		center = (1170, 84);
 		height = 1;
@@ -190,7 +190,7 @@ node L_and_P {
 	discrete = TRUE;
 	statetitles = ("Interested", "Not_Interested");
 	kind = NATURE;
-	parents = (K, J);
+	parents = (I, H);
 	title = "Learning & planning";
 	whenchanged = 1568962416;
 	visual V1 {
@@ -202,13 +202,13 @@ node L_and_P {
 		};
 	};
 
-node H {
+node J {
 	discrete = TRUE;
 	states = (Prof_Deshen_Moodley, Prof_Geoff_Nitschke, Prof_Maria_Keet, Prof_Tommie_Meyer, Prof_Hussein_Suleman, Cannot_Supervise);
 	kind = NATURE;
 	parents = (KRR, ML, L_and_P);
 	title = "Supervisors";
-	whenchanged = 1568962348;
+	whenchanged = 1569583746;
 	visual V1 {
 		center = (666, 492);
 		height = 10;
@@ -298,7 +298,7 @@ node NOTE11 {
 		height = 14;
 		};
 	};
-NodeSet Supervisors {Nodes = (H, NOTE17);};
+NodeSet Supervisors {Nodes = (J, NOTE17);};
 NodeSet Topics {Nodes = (ML, L_and_P, KRR, NOTE12);};
-NodeSet Subtopics {Nodes = (J, K, F, D, E, G, B, C, A, NOTE11);};
+NodeSet Subtopics {Nodes = (H, I, F, D, E, G, B, C, A, NOTE11);};
 };
