@@ -7,7 +7,9 @@ import java.io.FileNotFoundException;
 
 class AbstractAnalyser {
 	
+	static String path = "C:\\Users\\Josh\\eclipse-workspace\\Bayesian_Network\\Abstracts\\"; //MAKE SURE to update path to the 'Abstracts' Folder
 	private static int countAI; //the number of CSC words counted
+	private static int rowCount = 0;
 	private static HashMap<String, Integer> groupCounts; //store the count of words present in a group
 	
 	private static ArrayList<String> rows;
@@ -66,9 +68,10 @@ class AbstractAnalyser {
 			add(I);
 		}
 	};
-
+	
+	//reads all txt files in a directory and generates a row for each file
 	public static void openFiles(String directory) {
-		File dir = new File(directory);
+		File dir = new File(path+directory);
 		File[] directoryListing = dir.listFiles();
 		if (directoryListing != null) {
 			for (File child : directoryListing) {
@@ -80,7 +83,8 @@ class AbstractAnalyser {
 			System.out.println("Directory \"" + directory + "\" does not exist.");
 		}
 	}
-
+	
+	//reads lines of a txt file
 	public static void readFile(File file) {
 		Scanner s;
 		try {
@@ -89,7 +93,7 @@ class AbstractAnalyser {
 			while (s.hasNextLine()) {
 				String line = s.nextLine();
 				String afterchars = line.replaceAll("[.\"!,?\'@#$%&*(\")-+^:<>-]*", "").toLowerCase();
-            	System.out.println(afterchars);
+            	//System.out.println(afterchars);
                 String[] words = afterchars.split(" ");//those are your words
                 for(String word : words) {
                 	classifyWord(word);
@@ -100,13 +104,14 @@ class AbstractAnalyser {
 		}
 	}
 	
+	//classifies a word into AI groups
 	public static void classifyWord(String word) {
 		boolean isAIWord = false;
 		for(ArrayList<String> group : groups) {
 			if (group.contains(word)){
 				String groupName = group.get(0);
-				Integer currentCount = groupCounts.get(groupName);
-				groupCounts.put(groupName, currentCount++); // update count
+				groupCounts.put(groupName, groupCounts.get(groupName)+1); // update count
+				//System.out.println("updated: " + groupCounts.get(groupName));
 				isAIWord = true;
 			}
 		}
@@ -115,22 +120,25 @@ class AbstractAnalyser {
 		}
 	}
 	
+	//using counts in the hashmap, generate the row for the case file
 	public static void generateRow(String profName) {
 		String[] groups = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
-		String row = "Prof_" + profName; //add prof name as first column
+		String row = rowCount + "\t" + profName +"\t"; //add prof name as first column
 		for(String group: groups) {
-			float percent = groupCounts.get(group)/ countAI;
+			float percent = (float) groupCounts.get(group)/ countAI;
+			//System.out.println(groupCounts.get(group) + " " + countAI + " " + (float) groupCounts.get(group)/ countAI);
 			if(percent <= 0.33) {
 				row = row + "\"Low_Focus\"";
 			}else if(percent <= 0.66) {
-				row = row + "\"Low_Focus\"";
+				row = row + "\"Medium_Focus\"";
 			}else {
 				row = row + "\"High_Focus\"";
 			}
 			row = row + "\t";
 		}
-		row = row + "*\t*\t*\t*"; //add * for empty values
+		row = row + "*\t*\t*"; //add * for empty values
 		rows.add(row);
+		rowCount++;
 		System.out.println(row);
 		
 		//clear counts for next row
@@ -149,13 +157,20 @@ class AbstractAnalyser {
 	public static void main(String[] args) {
 		
 		//Initialise HashMap & countAI values
+		groupCounts = new HashMap<String, Integer>();
 		reset();
 
 		//Initialise ArrayList to store all rows to write to case file
 		rows = new ArrayList<String>();
 		
-
-		// prep abstract for processing
+		//Print top row
+		System.out.println("IDnum\tSupervisor\tA\tB\tC\tD\tE\tF\tG\tH\tI\tML\tL_and_P\tKRR");
+		
+		
+		String[] folderNames = {"Prof_Hussein_Suleman", "Prof_Geoff_Nitschke", "Prof_Deshen_Moodley", "Prof_Maria_Keet", "Prof_Tommie_Meyer"};
+		for(String profFolder : folderNames) {
+			openFiles(profFolder);
+		}
 
 	}// end main
 
