@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.io.File;
@@ -11,6 +12,9 @@ class AbstractAnalyser {
 	private static int countAI; //the number of CSC words counted
 	private static int rowCount = 0;
 	private static HashMap<String, Integer> groupCounts; //store the count of words present in a group
+	private static HashMap<String, Boolean> interested; //track if a certain topic is of interest (if high_focus)
+	
+	static ArrayList<Float> percents = new ArrayList<Float>();
 	
 	private static ArrayList<String> rows;
 	
@@ -123,20 +127,50 @@ class AbstractAnalyser {
 	//using counts in the hashmap, generate the row for the case file
 	public static void generateRow(String profName) {
 		String[] groups = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
+		String maxGroup = "";
+		float maxPercent = 0;
+		
+		String KRR = "\"Not_Interested\""; String ML = "\"Not_Interested\""; String LP = "\"Not_Interested\"";
+		
 		String row = rowCount + "\t" + profName +"\t"; //add prof name as first column
 		for(String group: groups) {
 			float percent = (float) groupCounts.get(group)/ countAI;
 			//System.out.println(groupCounts.get(group) + " " + countAI + " " + (float) groupCounts.get(group)/ countAI);
-			if(percent <= 0.33) {
+			percents.add(percent);
+			if(percent <= 0.13818) {
 				row = row + "\"Low_Focus\"";
-			}else if(percent <= 0.66) {
+			}else if(percent <= 0.20417) {
 				row = row + "\"Medium_Focus\"";
 			}else {
 				row = row + "\"High_Focus\"";
+				interested.put(group, true); //if high focus, make that group interested
+			}
+			//update maximums 
+			if(percent > maxPercent) {
+				maxPercent = percent;
+				maxGroup = group;
 			}
 			row = row + "\t";
 		}
-		row = row + "*\t*\t*"; //add * for empty values
+		
+		//add interested/ Not Interested data
+		if(!interested.containsValue(true)) {
+			interested.put(maxGroup, true);
+		}
+		
+		//if any of the subtopics are of high-focus then make that topic interested
+		if(interested.get("A") || interested.get("B") || interested.get("C")) {
+			KRR = "\"Interested\"";
+		}
+		if(interested.get("D") || interested.get("E") || interested.get("F") || interested.get("G")) {
+			ML = "\"Interested\"";
+		}
+		if(interested.get("H") || interested.get("I")) {
+			LP = "\"Interested\"";
+		}
+		
+		row = row + ML + "\t" + LP + "\t" + KRR;
+		
 		rows.add(row);
 		rowCount++;
 		System.out.println(row);
@@ -152,25 +186,33 @@ class AbstractAnalyser {
 		groupCounts.put("A", 0); groupCounts.put("B", 0); groupCounts.put("C", 0);
 		groupCounts.put("D", 0); groupCounts.put("E", 0); groupCounts.put("F", 0);
 		groupCounts.put("G", 0); groupCounts.put("H", 0); groupCounts.put("I", 0);
+		interested.put("A", false); interested.put("B", false); interested.put("C", false);
+		interested.put("D", false); interested.put("E", false); interested.put("F", false);
+		interested.put("G", false); interested.put("H", false); interested.put("I", false);
 	}
 
 	public static void main(String[] args) {
 		
 		//Initialise HashMap & countAI values
 		groupCounts = new HashMap<String, Integer>();
+		interested = new HashMap<String, Boolean>();
 		reset();
 
 		//Initialise ArrayList to store all rows to write to case file
 		rows = new ArrayList<String>();
 		
 		//Print top row
-		System.out.println("IDnum\tSupervisor\tA\tB\tC\tD\tE\tF\tG\tH\tI\tML\tL_and_P\tKRR");
+		System.out.println("IDnum\tJ\tA\tB\tC\tD\tE\tF\tG\tH\tI\tML\tL_and_P\tKRR");
 		
 		
 		String[] folderNames = {"Prof_Hussein_Suleman", "Prof_Geoff_Nitschke", "Prof_Deshen_Moodley", "Prof_Maria_Keet", "Prof_Tommie_Meyer"};
 		for(String profFolder : folderNames) {
 			openFiles(profFolder);
 		}
+		
+		//print the proportion values for analysis
+		//Collections.sort(percents);
+		//System.out.println(percents);
 
 	}// end main
 
