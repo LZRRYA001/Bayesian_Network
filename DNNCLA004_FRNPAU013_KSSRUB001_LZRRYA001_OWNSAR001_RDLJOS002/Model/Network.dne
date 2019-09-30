@@ -1,0 +1,635 @@
+// ~->[DNET-1]->~
+
+// File created by an unlicensed user using Netica 6.05 on Sep 28, 2019 at 09:43:03 UTC.
+
+bnet Network {
+AutoCompile = TRUE;
+autoupdate = TRUE;
+whenchanged = 1569663779;
+
+visual V1 {
+	defdispform = BELIEFBARS;
+	nodelabeling = TITLE;
+	NodeMaxNumEntries = 50;
+	nodefont = font {shape= "Arial"; size= 9;};
+	linkfont = font {shape= "Arial"; size= 9;};
+	ShowLinkStrengths = 1;
+	windowposn = (3, 10, 1351, 644);
+	scrollposn = (9, 0);
+	resolution = 72;
+	drawingbounds = (1372, 720);
+	showpagebreaks = FALSE;
+	usegrid = TRUE;
+	gridspace = (6, 6);
+	NodeSet Node {BuiltIn = 1; Color = 0x00e1e1e1;};
+	NodeSet Nature {BuiltIn = 1; Color = 0x00f8eed2;};
+	NodeSet Deterministic {BuiltIn = 1; Color = 0x00d3caa6;};
+	NodeSet Finding {BuiltIn = 1; Color = 0x00c8c8c8;};
+	NodeSet Constant {BuiltIn = 1; Color = 0x00ffffff;};
+	NodeSet ConstantValue {BuiltIn = 1; Color = 0x00ffffb4;};
+	NodeSet Utility {BuiltIn = 1; Color = 0x00ffbdbd;};
+	NodeSet Decision {BuiltIn = 1; Color = 0x00dee8ff;};
+	NodeSet Documentation {BuiltIn = 1; Color = 0x00f0fafa;};
+	NodeSet Title {BuiltIn = 1; Color = 0x00ffffff;};
+	NodeSet Supervisors {Color = 0x00f0eaa0;};
+	NodeSet Topics {Color = 0x00a0ecf0;};
+	NodeSet Subtopics {Color = 0x00baf7ba;};
+	PrinterSetting A {
+		margins = (1270, 1270, 1270, 1270);
+		};
+	};
+
+node A {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = ();
+	probs = 
+		// Low_Focus    Medium_Focus High_Focus   
+		  (0.3214286,   0.1071429,   0.5714286);
+	numcases = 28;
+	title = "logic, ontologies and causal networks, knowledge based systems";
+	whenchanged = 1569663779;
+	belief = (0.3214286, 0.1071428, 0.5714286);
+	visual V1 {
+		center = (366, 216);
+		height = 12;
+		};
+	};
+
+node C {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = ();
+	probs = 
+		// Low_Focus    Medium_Focus High_Focus   
+		  (0.75,        0.1785714,   0.07142857);
+	numcases = 28;
+	title = "top down AI";
+	whenchanged = 1569663779;
+	belief = (0.75, 0.1785714, 0.07142857);
+	visual V1 {
+		center = (102, 252);
+		height = 11;
+		};
+	};
+
+node B {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = ();
+	probs = 
+		// Low_Focus    Medium_Focus High_Focus   
+		  (0.5714286,   0.1428571,   0.2857143);
+	numcases = 28;
+	title = "Representing and reasoning with expert knowledge";
+	whenchanged = 1569663779;
+	belief = (0.5714285, 0.1428571, 0.2857143);
+	visual V1 {
+		center = (150, 138);
+		height = 6;
+		};
+	};
+
+node KRR {
+	discrete = TRUE;
+	statetitles = ("Interested", "Not_Interested");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = (A, C, B);
+	probs = 
+		// Interested   Not_Interested  // A            C            B            
+		  (0.1666667,   0.8333333,    // Low_Focus    Low_Focus    Low_Focus    
+		   0.3333333,   0.6666667,    // Low_Focus    Low_Focus    Medium_Focus 
+		   0.5,         0.5,          // Low_Focus    Low_Focus    High_Focus   
+		   0.25,        0.75,         // Low_Focus    Medium_Focus Low_Focus    
+		   0.3333333,   0.6666667,    // Low_Focus    Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // Low_Focus    Medium_Focus High_Focus   
+		   0.5,         0.5,          // Low_Focus    High_Focus   Low_Focus    
+		   0.5,         0.5,          // Low_Focus    High_Focus   Medium_Focus 
+		   0.5,         0.5,          // Low_Focus    High_Focus   High_Focus   
+		   0.5,         0.5,          // Medium_Focus Low_Focus    Low_Focus    
+		   0.5,         0.5,          // Medium_Focus Low_Focus    Medium_Focus 
+		   0.6666667,   0.3333333,    // Medium_Focus Low_Focus    High_Focus   
+		   0.3333333,   0.6666667,    // Medium_Focus Medium_Focus Low_Focus    
+		   0.5,         0.5,          // Medium_Focus Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus Medium_Focus High_Focus   
+		   0.5,         0.5,          // Medium_Focus High_Focus   Low_Focus    
+		   0.5,         0.5,          // Medium_Focus High_Focus   Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus High_Focus   High_Focus   
+		   0.8888889,   0.1111111,    // High_Focus   Low_Focus    Low_Focus    
+		   0.6666667,   0.3333333,    // High_Focus   Low_Focus    Medium_Focus 
+		   0.875,       0.125,        // High_Focus   Low_Focus    High_Focus   
+		   0.5,         0.5,          // High_Focus   Medium_Focus Low_Focus    
+		   0.5,         0.5,          // High_Focus   Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // High_Focus   Medium_Focus High_Focus   
+		   0.6666667,   0.3333333,    // High_Focus   High_Focus   Low_Focus    
+		   0.5,         0.5,          // High_Focus   High_Focus   Medium_Focus 
+		   0.5,         0.5);         // High_Focus   High_Focus   High_Focus   ;
+	numcases = 
+		                 // A            C            B            
+		  (6,            // Low_Focus    Low_Focus    Low_Focus    
+		   3,            // Low_Focus    Low_Focus    Medium_Focus 
+		   2,            // Low_Focus    Low_Focus    High_Focus   
+		   4,            // Low_Focus    Medium_Focus Low_Focus    
+		   3,            // Low_Focus    Medium_Focus Medium_Focus 
+		   2,            // Low_Focus    Medium_Focus High_Focus   
+		   2,            // Low_Focus    High_Focus   Low_Focus    
+		   2,            // Low_Focus    High_Focus   Medium_Focus 
+		   2,            // Low_Focus    High_Focus   High_Focus   
+		   2,            // Medium_Focus Low_Focus    Low_Focus    
+		   2,            // Medium_Focus Low_Focus    Medium_Focus 
+		   3,            // Medium_Focus Low_Focus    High_Focus   
+		   3,            // Medium_Focus Medium_Focus Low_Focus    
+		   2,            // Medium_Focus Medium_Focus Medium_Focus 
+		   2,            // Medium_Focus Medium_Focus High_Focus   
+		   2,            // Medium_Focus High_Focus   Low_Focus    
+		   2,            // Medium_Focus High_Focus   Medium_Focus 
+		   2,            // Medium_Focus High_Focus   High_Focus   
+		   9,            // High_Focus   Low_Focus    Low_Focus    
+		   3,            // High_Focus   Low_Focus    Medium_Focus 
+		   8,            // High_Focus   Low_Focus    High_Focus   
+		   2,            // High_Focus   Medium_Focus Low_Focus    
+		   2,            // High_Focus   Medium_Focus Medium_Focus 
+		   2,            // High_Focus   Medium_Focus High_Focus   
+		   3,            // High_Focus   High_Focus   Low_Focus    
+		   2,            // High_Focus   High_Focus   Medium_Focus 
+		   2);           // High_Focus   High_Focus   High_Focus   ;
+	title = "Knowledge representation and reasoning";
+	whenchanged = 1569663779;
+	belief = (0.5960277, 0.4039723);
+	visual V1 {
+		center = (396, 330);
+		height = 9;
+		link 1 {
+			path = ((374, 250), (389, 304));
+			};
+		link 2 {
+			path = ((204, 279), (296, 304));
+			};
+		};
+	};
+
+node G {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = ();
+	probs = 
+		// Low_Focus    Medium_Focus High_Focus   
+		  (0.6428571,   0.1785714,   0.1785714);
+	numcases = 28;
+	title = "bottom-up AI";
+	whenchanged = 1569663779;
+	belief = (0.6428571, 0.1785714, 0.1785714);
+	visual V1 {
+		center = (366, 60);
+		height = 5;
+		};
+	};
+
+node E {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = ();
+	probs = 
+		// Low_Focus    Medium_Focus High_Focus   
+		  (0.5714286,   0.1428571,   0.2857143);
+	numcases = 28;
+	title = "building classification & predictive models from labelled historical data";
+	whenchanged = 1569663779;
+	belief = (0.5714286, 0.1428571, 0.2857143);
+	visual V1 {
+		center = (624, 126);
+		height = 13;
+		};
+	};
+
+node F {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = ();
+	probs = 
+		// Low_Focus    Medium_Focus High_Focus   
+		  (0.6428571,   0.1428571,   0.2142857);
+	numcases = 28;
+	title = "finding structure or patterns in unlabelled data";
+	whenchanged = 1569663779;
+	belief = (0.6428571, 0.1428571, 0.2142857);
+	visual V1 {
+		center = (924, 150);
+		height = 3;
+		};
+	};
+
+node D {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = ();
+	probs = 
+		// Low_Focus    Medium_Focus High_Focus   
+		  (0.8214286,   0.07142857,  0.1071429);
+	numcases = 28;
+	title = "artificial neural networks, clustering techniques";
+	whenchanged = 1569663779;
+	belief = (0.8214286, 0.07142857, 0.1071429);
+	visual V1 {
+		center = (816, 54);
+		height = 4;
+		};
+	};
+
+node ML {
+	discrete = TRUE;
+	statetitles = ("Interested", "Not_Interested");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = (G, E, F, D);
+	probs = 
+		// Interested   Not_Interested  // G            E            F            D            
+		  (0.08333334,  0.9166667,    // Low_Focus    Low_Focus    Low_Focus    Low_Focus    
+		   0.5,         0.5,          // Low_Focus    Low_Focus    Low_Focus    Medium_Focus 
+		   0.75,        0.25,         // Low_Focus    Low_Focus    Low_Focus    High_Focus   
+		   0.5,         0.5,          // Low_Focus    Low_Focus    Medium_Focus Low_Focus    
+		   0.3333333,   0.6666667,    // Low_Focus    Low_Focus    Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // Low_Focus    Low_Focus    Medium_Focus High_Focus   
+		   0.5,         0.5,          // Low_Focus    Low_Focus    High_Focus   Low_Focus    
+		   0.5,         0.5,          // Low_Focus    Low_Focus    High_Focus   Medium_Focus 
+		   0.5,         0.5,          // Low_Focus    Low_Focus    High_Focus   High_Focus   
+		   0.3333333,   0.6666667,    // Low_Focus    Medium_Focus Low_Focus    Low_Focus    
+		   0.5,         0.5,          // Low_Focus    Medium_Focus Low_Focus    Medium_Focus 
+		   0.5,         0.5,          // Low_Focus    Medium_Focus Low_Focus    High_Focus   
+		   0.5,         0.5,          // Low_Focus    Medium_Focus Medium_Focus Low_Focus    
+		   0.5,         0.5,          // Low_Focus    Medium_Focus Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // Low_Focus    Medium_Focus Medium_Focus High_Focus   
+		   0.5,         0.5,          // Low_Focus    Medium_Focus High_Focus   Low_Focus    
+		   0.5,         0.5,          // Low_Focus    Medium_Focus High_Focus   Medium_Focus 
+		   0.5,         0.5,          // Low_Focus    Medium_Focus High_Focus   High_Focus   
+		   0.75,        0.25,         // Low_Focus    High_Focus   Low_Focus    Low_Focus    
+		   0.5,         0.5,          // Low_Focus    High_Focus   Low_Focus    Medium_Focus 
+		   0.5,         0.5,          // Low_Focus    High_Focus   Low_Focus    High_Focus   
+		   0.6666667,   0.3333333,    // Low_Focus    High_Focus   Medium_Focus Low_Focus    
+		   0.5,         0.5,          // Low_Focus    High_Focus   Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // Low_Focus    High_Focus   Medium_Focus High_Focus   
+		   0.5,         0.5,          // Low_Focus    High_Focus   High_Focus   Low_Focus    
+		   0.5,         0.5,          // Low_Focus    High_Focus   High_Focus   Medium_Focus 
+		   0.5,         0.5,          // Low_Focus    High_Focus   High_Focus   High_Focus   
+		   0.5,         0.5,          // Medium_Focus Low_Focus    Low_Focus    Low_Focus    
+		   0.5,         0.5,          // Medium_Focus Low_Focus    Low_Focus    Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus Low_Focus    Low_Focus    High_Focus   
+		   0.3333333,   0.6666667,    // Medium_Focus Low_Focus    Medium_Focus Low_Focus    
+		   0.5,         0.5,          // Medium_Focus Low_Focus    Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus Low_Focus    Medium_Focus High_Focus   
+		   0.5,         0.5,          // Medium_Focus Low_Focus    High_Focus   Low_Focus    
+		   0.5,         0.5,          // Medium_Focus Low_Focus    High_Focus   Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus Low_Focus    High_Focus   High_Focus   
+		   0.5,         0.5,          // Medium_Focus Medium_Focus Low_Focus    Low_Focus    
+		   0.5,         0.5,          // Medium_Focus Medium_Focus Low_Focus    Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus Medium_Focus Low_Focus    High_Focus   
+		   0.5,         0.5,          // Medium_Focus Medium_Focus Medium_Focus Low_Focus    
+		   0.5,         0.5,          // Medium_Focus Medium_Focus Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus Medium_Focus Medium_Focus High_Focus   
+		   0.6666667,   0.3333333,    // Medium_Focus Medium_Focus High_Focus   Low_Focus    
+		   0.5,         0.5,          // Medium_Focus Medium_Focus High_Focus   Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus Medium_Focus High_Focus   High_Focus   
+		   0.6666667,   0.3333333,    // Medium_Focus High_Focus   Low_Focus    Low_Focus    
+		   0.5,         0.5,          // Medium_Focus High_Focus   Low_Focus    Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus High_Focus   Low_Focus    High_Focus   
+		   0.5,         0.5,          // Medium_Focus High_Focus   Medium_Focus Low_Focus    
+		   0.5,         0.5,          // Medium_Focus High_Focus   Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus High_Focus   Medium_Focus High_Focus   
+		   0.6666667,   0.3333333,    // Medium_Focus High_Focus   High_Focus   Low_Focus    
+		   0.5,         0.5,          // Medium_Focus High_Focus   High_Focus   Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus High_Focus   High_Focus   High_Focus   
+		   0.6666667,   0.3333333,    // High_Focus   Low_Focus    Low_Focus    Low_Focus    
+		   0.5,         0.5,          // High_Focus   Low_Focus    Low_Focus    Medium_Focus 
+		   0.5,         0.5,          // High_Focus   Low_Focus    Low_Focus    High_Focus   
+		   0.5,         0.5,          // High_Focus   Low_Focus    Medium_Focus Low_Focus    
+		   0.5,         0.5,          // High_Focus   Low_Focus    Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // High_Focus   Low_Focus    Medium_Focus High_Focus   
+		   0.5,         0.5,          // High_Focus   Low_Focus    High_Focus   Low_Focus    
+		   0.5,         0.5,          // High_Focus   Low_Focus    High_Focus   Medium_Focus 
+		   0.5,         0.5,          // High_Focus   Low_Focus    High_Focus   High_Focus   
+		   0.5,         0.5,          // High_Focus   Medium_Focus Low_Focus    Low_Focus    
+		   0.5,         0.5,          // High_Focus   Medium_Focus Low_Focus    Medium_Focus 
+		   0.5,         0.5,          // High_Focus   Medium_Focus Low_Focus    High_Focus   
+		   0.5,         0.5,          // High_Focus   Medium_Focus Medium_Focus Low_Focus    
+		   0.5,         0.5,          // High_Focus   Medium_Focus Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // High_Focus   Medium_Focus Medium_Focus High_Focus   
+		   0.6666667,   0.3333333,    // High_Focus   Medium_Focus High_Focus   Low_Focus    
+		   0.5,         0.5,          // High_Focus   Medium_Focus High_Focus   Medium_Focus 
+		   0.5,         0.5,          // High_Focus   Medium_Focus High_Focus   High_Focus   
+		   0.5,         0.5,          // High_Focus   High_Focus   Low_Focus    Low_Focus    
+		   0.5,         0.5,          // High_Focus   High_Focus   Low_Focus    Medium_Focus 
+		   0.5,         0.5,          // High_Focus   High_Focus   Low_Focus    High_Focus   
+		   0.5,         0.5,          // High_Focus   High_Focus   Medium_Focus Low_Focus    
+		   0.5,         0.5,          // High_Focus   High_Focus   Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // High_Focus   High_Focus   Medium_Focus High_Focus   
+		   0.75,        0.25,         // High_Focus   High_Focus   High_Focus   Low_Focus    
+		   0.5,         0.5,          // High_Focus   High_Focus   High_Focus   Medium_Focus 
+		   0.5,         0.5);         // High_Focus   High_Focus   High_Focus   High_Focus   ;
+	numcases = 
+		                 // G            E            F            D            
+		  (12,           // Low_Focus    Low_Focus    Low_Focus    Low_Focus    
+		   2,            // Low_Focus    Low_Focus    Low_Focus    Medium_Focus 
+		   4,            // Low_Focus    Low_Focus    Low_Focus    High_Focus   
+		   2,            // Low_Focus    Low_Focus    Medium_Focus Low_Focus    
+		   3,            // Low_Focus    Low_Focus    Medium_Focus Medium_Focus 
+		   2,            // Low_Focus    Low_Focus    Medium_Focus High_Focus   
+		   2,            // Low_Focus    Low_Focus    High_Focus   Low_Focus    
+		   2,            // Low_Focus    Low_Focus    High_Focus   Medium_Focus 
+		   2,            // Low_Focus    Low_Focus    High_Focus   High_Focus   
+		   3,            // Low_Focus    Medium_Focus Low_Focus    Low_Focus    
+		   2,            // Low_Focus    Medium_Focus Low_Focus    Medium_Focus 
+		   2,            // Low_Focus    Medium_Focus Low_Focus    High_Focus   
+		   2,            // Low_Focus    Medium_Focus Medium_Focus Low_Focus    
+		   2,            // Low_Focus    Medium_Focus Medium_Focus Medium_Focus 
+		   2,            // Low_Focus    Medium_Focus Medium_Focus High_Focus   
+		   2,            // Low_Focus    Medium_Focus High_Focus   Low_Focus    
+		   2,            // Low_Focus    Medium_Focus High_Focus   Medium_Focus 
+		   2,            // Low_Focus    Medium_Focus High_Focus   High_Focus   
+		   4,            // Low_Focus    High_Focus   Low_Focus    Low_Focus    
+		   2,            // Low_Focus    High_Focus   Low_Focus    Medium_Focus 
+		   2,            // Low_Focus    High_Focus   Low_Focus    High_Focus   
+		   3,            // Low_Focus    High_Focus   Medium_Focus Low_Focus    
+		   2,            // Low_Focus    High_Focus   Medium_Focus Medium_Focus 
+		   2,            // Low_Focus    High_Focus   Medium_Focus High_Focus   
+		   2,            // Low_Focus    High_Focus   High_Focus   Low_Focus    
+		   2,            // Low_Focus    High_Focus   High_Focus   Medium_Focus 
+		   2,            // Low_Focus    High_Focus   High_Focus   High_Focus   
+		   2,            // Medium_Focus Low_Focus    Low_Focus    Low_Focus    
+		   2,            // Medium_Focus Low_Focus    Low_Focus    Medium_Focus 
+		   2,            // Medium_Focus Low_Focus    Low_Focus    High_Focus   
+		   3,            // Medium_Focus Low_Focus    Medium_Focus Low_Focus    
+		   2,            // Medium_Focus Low_Focus    Medium_Focus Medium_Focus 
+		   2,            // Medium_Focus Low_Focus    Medium_Focus High_Focus   
+		   2,            // Medium_Focus Low_Focus    High_Focus   Low_Focus    
+		   2,            // Medium_Focus Low_Focus    High_Focus   Medium_Focus 
+		   2,            // Medium_Focus Low_Focus    High_Focus   High_Focus   
+		   2,            // Medium_Focus Medium_Focus Low_Focus    Low_Focus    
+		   2,            // Medium_Focus Medium_Focus Low_Focus    Medium_Focus 
+		   2,            // Medium_Focus Medium_Focus Low_Focus    High_Focus   
+		   2,            // Medium_Focus Medium_Focus Medium_Focus Low_Focus    
+		   2,            // Medium_Focus Medium_Focus Medium_Focus Medium_Focus 
+		   2,            // Medium_Focus Medium_Focus Medium_Focus High_Focus   
+		   3,            // Medium_Focus Medium_Focus High_Focus   Low_Focus    
+		   2,            // Medium_Focus Medium_Focus High_Focus   Medium_Focus 
+		   2,            // Medium_Focus Medium_Focus High_Focus   High_Focus   
+		   3,            // Medium_Focus High_Focus   Low_Focus    Low_Focus    
+		   2,            // Medium_Focus High_Focus   Low_Focus    Medium_Focus 
+		   2,            // Medium_Focus High_Focus   Low_Focus    High_Focus   
+		   2,            // Medium_Focus High_Focus   Medium_Focus Low_Focus    
+		   2,            // Medium_Focus High_Focus   Medium_Focus Medium_Focus 
+		   2,            // Medium_Focus High_Focus   Medium_Focus High_Focus   
+		   3,            // Medium_Focus High_Focus   High_Focus   Low_Focus    
+		   2,            // Medium_Focus High_Focus   High_Focus   Medium_Focus 
+		   2,            // Medium_Focus High_Focus   High_Focus   High_Focus   
+		   3,            // High_Focus   Low_Focus    Low_Focus    Low_Focus    
+		   2,            // High_Focus   Low_Focus    Low_Focus    Medium_Focus 
+		   2,            // High_Focus   Low_Focus    Low_Focus    High_Focus   
+		   2,            // High_Focus   Low_Focus    Medium_Focus Low_Focus    
+		   2,            // High_Focus   Low_Focus    Medium_Focus Medium_Focus 
+		   2,            // High_Focus   Low_Focus    Medium_Focus High_Focus   
+		   2,            // High_Focus   Low_Focus    High_Focus   Low_Focus    
+		   2,            // High_Focus   Low_Focus    High_Focus   Medium_Focus 
+		   2,            // High_Focus   Low_Focus    High_Focus   High_Focus   
+		   2,            // High_Focus   Medium_Focus Low_Focus    Low_Focus    
+		   2,            // High_Focus   Medium_Focus Low_Focus    Medium_Focus 
+		   2,            // High_Focus   Medium_Focus Low_Focus    High_Focus   
+		   2,            // High_Focus   Medium_Focus Medium_Focus Low_Focus    
+		   2,            // High_Focus   Medium_Focus Medium_Focus Medium_Focus 
+		   2,            // High_Focus   Medium_Focus Medium_Focus High_Focus   
+		   3,            // High_Focus   Medium_Focus High_Focus   Low_Focus    
+		   2,            // High_Focus   Medium_Focus High_Focus   Medium_Focus 
+		   2,            // High_Focus   Medium_Focus High_Focus   High_Focus   
+		   2,            // High_Focus   High_Focus   Low_Focus    Low_Focus    
+		   2,            // High_Focus   High_Focus   Low_Focus    Medium_Focus 
+		   2,            // High_Focus   High_Focus   Low_Focus    High_Focus   
+		   2,            // High_Focus   High_Focus   Medium_Focus Low_Focus    
+		   2,            // High_Focus   High_Focus   Medium_Focus Medium_Focus 
+		   2,            // High_Focus   High_Focus   Medium_Focus High_Focus   
+		   4,            // High_Focus   High_Focus   High_Focus   Low_Focus    
+		   2,            // High_Focus   High_Focus   High_Focus   Medium_Focus 
+		   2);           // High_Focus   High_Focus   High_Focus   High_Focus   ;
+	title = "Machine learning & pattern recognition ";
+	whenchanged = 1569663779;
+	belief = (0.4613464, 0.5386536);
+	visual V1 {
+		center = (672, 330);
+		height = 7;
+		};
+	};
+
+node I {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = ();
+	probs = 
+		// Low_Focus    Medium_Focus High_Focus   
+		  (0.4285714,   0.1785714,   0.3928571);
+	numcases = 28;
+	title = "models for action/path selection in complex environments";
+	whenchanged = 1569663779;
+	belief = (0.4285714, 0.1785714, 0.3928572);
+	visual V1 {
+		center = (1224, 210);
+		height = 2;
+		};
+	};
+
+node H {
+	discrete = TRUE;
+	statetitles = ("Low_Focus", "Medium_Focus", "High_Focus");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = ();
+	probs = 
+		// Low_Focus    Medium_Focus High_Focus   
+		  (0.6071429,   0.2142857,   0.1785714);
+	numcases = 28;
+	title = "reinforcement learning (RL) & Markov decision processes";
+	whenchanged = 1569663779;
+	belief = (0.6071429, 0.2142857, 0.1785714);
+	visual V1 {
+		center = (1170, 84);
+		height = 1;
+		};
+	};
+
+node L_and_P {
+	discrete = TRUE;
+	statetitles = ("Interested", "Not_Interested");
+	kind = NATURE;
+	chance = CHANCE;
+	parents = (I, H);
+	probs = 
+		// Interested   Not_Interested  // I            H            
+		  (0.1111111,   0.8888889,    // Low_Focus    Low_Focus    
+		   0.25,        0.75,         // Low_Focus    Medium_Focus 
+		   0.75,        0.25,         // Low_Focus    High_Focus   
+		   0.1666667,   0.8333333,    // Medium_Focus Low_Focus    
+		   0.5,         0.5,          // Medium_Focus Medium_Focus 
+		   0.5,         0.5,          // Medium_Focus High_Focus   
+		   0.8571429,   0.1428571,    // High_Focus   Low_Focus    
+		   0.8,         0.2,          // High_Focus   Medium_Focus 
+		   0.75,        0.25);        // High_Focus   High_Focus   ;
+	numcases = 
+		                 // I            H            
+		  (9,            // Low_Focus    Low_Focus    
+		   4,            // Low_Focus    Medium_Focus 
+		   4,            // Low_Focus    High_Focus   
+		   6,            // Medium_Focus Low_Focus    
+		   2,            // Medium_Focus Medium_Focus 
+		   2,            // Medium_Focus High_Focus   
+		   7,            // High_Focus   Low_Focus    
+		   5,            // High_Focus   Medium_Focus 
+		   4);           // High_Focus   High_Focus   ;
+	title = "Learning & planning";
+	whenchanged = 1569663779;
+	belief = (0.4868228, 0.5131772);
+	visual V1 {
+		center = (918, 330);
+		height = 8;
+		link 1 {
+			path = ((1141, 244), (985, 304));
+			};
+		};
+	};
+
+node J {
+	discrete = TRUE;
+	states = (Prof_Deshen_Moodley, Prof_Geoff_Nitschke, Prof_Maria_Keet, Prof_Tommie_Meyer, Prof_Hussein_Suleman, Cannot_Supervise);
+	kind = NATURE;
+	chance = CHANCE;
+	parents = (KRR, ML, L_and_P);
+	probs = 
+		// Prof Deshen Mood Prof Geoff Nitsc Prof Maria Keet Prof Tommie Meye Prof Hussein Sul Cannot Supervise  // KRR            ML             L_and_P        
+		  (0.125,       0.125,       0.25,        0.125,       0.25,        0.125,        // Interested     Interested     Interested     
+		   0.1,         0.2,         0.2,         0.2,         0.2,         0.1,          // Interested     Interested     Not_Interested 
+		   0.1111111,   0.2222222,   0.2222222,   0.2222222,   0.1111111,   0.1111111,    // Interested     Not_Interested Interested     
+		   0.1538462,   0.07692308,  0.2307692,   0.3076923,   0.1538462,   0.07692308,   // Interested     Not_Interested Not_Interested 
+		   0.3,         0.2,         0.1,         0.1,         0.2,         0.1,          // Not_Interested Interested     Interested     
+		   0.25,        0.125,       0.125,       0.125,       0.25,        0.125,        // Not_Interested Interested     Not_Interested 
+		   0.2222222,   0.3333333,   0.1111111,   0.1111111,   0.1111111,   0.1111111,    // Not_Interested Not_Interested Interested     
+		   0.1666667,   0.1666667,   0.1666667,   0.1666667,   0.1666667,   0.1666667);   // Not_Interested Not_Interested Not_Interested ;
+	numcases = 
+		                 // KRR            ML             L_and_P        
+		  (8,            // Interested     Interested     Interested     
+		   10,           // Interested     Interested     Not_Interested 
+		   9,            // Interested     Not_Interested Interested     
+		   13,           // Interested     Not_Interested Not_Interested 
+		   10,           // Not_Interested Interested     Interested     
+		   8,            // Not_Interested Interested     Not_Interested 
+		   9,            // Not_Interested Not_Interested Interested     
+		   6);           // Not_Interested Not_Interested Not_Interested ;
+	title = "Supervisors";
+	whenchanged = 1569663779;
+	belief = (0.1668388, 0.1763847, 0.1858513, 0.1817918, 0.1768396, 0.1122937);
+	visual V1 {
+		center = (666, 492);
+		height = 10;
+		};
+	};
+
+node NOTE18 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Supervisors";
+	whenchanged = 1568964363;
+	visual V1 {
+		center = (1218, 498);
+		dispform = LABELBOX;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 19;
+		};
+	};
+
+node NOTE15 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Topics";
+	whenchanged = 1568964358;
+	visual V1 {
+		center = (1203, 474);
+		dispform = LABELBOX;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 16;
+		};
+	};
+
+node NOTE12 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Diseases";
+	whenchanged = 1084337466;
+	visual V1 {
+		center = (1152, 474);
+		dispform = SHAPE;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 15;
+		};
+	};
+
+node NOTE17 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Diseases";
+	whenchanged = 1084337466;
+	visual V1 {
+		center = (1152, 498);
+		dispform = SHAPE;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 17;
+		};
+	};
+
+node NOTE14 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Subtopics";
+	whenchanged = 1568964351;
+	visual V1 {
+		center = (1212, 450);
+		dispform = LABELBOX;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 18;
+		};
+	};
+
+node NOTE11 {
+	discrete = FALSE;
+	kind = CONSTANT;
+	parents = ();
+	title = "Contributing Factors";
+	whenchanged = 1084339137;
+	visual V1 {
+		center = (1152, 450);
+		dispform = SHAPE;
+		font = font {shape= "Times New Roman"; size= 12;};
+		height = 14;
+		};
+	};
+NodeSet Supervisors {Nodes = (J, NOTE17);};
+NodeSet Topics {Nodes = (ML, L_and_P, KRR, NOTE12);};
+NodeSet Subtopics {Nodes = (H, I, F, D, E, G, B, C, A, NOTE11);};
+ElimOrder = (I, H, L_and_P, J, A, C, B, KRR, G, E, F, D, ML);
+};

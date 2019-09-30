@@ -6,8 +6,9 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-class SubmittedAbstractAnalyser {
+class AbstractAnalyser {
 	
+	static String path = "C:\\Users\\Josh\\eclipse-workspace\\Bayesian_Network\\Abstracts\\"; //MAKE SURE to update path to the 'Abstracts' Folder
 	private static int countAI; //the number of CSC words counted
 	private static int rowCount = 0;
 	private static HashMap<String, Integer> groupCounts; //store the count of words present in a group
@@ -72,13 +73,19 @@ class SubmittedAbstractAnalyser {
 		}
 	};
 	
-	//reads txt file and generates a row for the file
-	public static void openFile() {
-      try{
-         readFile(new File("abstract.txt"));
-			generateRow();
-         }
-      catch (Exception e){e.printStackTrace();}
+	//reads all txt files in a directory and generates a row for each file
+	public static void openFiles(String directory) {
+		File dir = new File(path+directory);
+		File[] directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+			for (File child : directoryListing) {
+				readFile(child);
+				generateRow(directory);
+			}
+		} else {
+			// Handle the case where dir is not really a directory.
+			System.out.println("Directory \"" + directory + "\" does not exist.");
+		}
 	}
 	
 	//reads lines of a txt file
@@ -118,14 +125,14 @@ class SubmittedAbstractAnalyser {
 	}
 	
 	//using counts in the hashmap, generate the row for the case file
-	public static void generateRow() {
+	public static void generateRow(String profName) {
 		String[] groups = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
 		String maxGroup = "";
 		float maxPercent = 0;
 		
 		String KRR = "\"Not_Interested\""; String ML = "\"Not_Interested\""; String LP = "\"Not_Interested\"";
 		
-		String row = rowCount + "\t" + "*" +"\t"; //add prof name as first column
+		String row = rowCount + "\t" + profName +"\t"; //add prof name as first column
 		for(String group: groups) {
 			float percent = (float) groupCounts.get(group)/ countAI;
 			//System.out.println(groupCounts.get(group) + " " + countAI + " " + (float) groupCounts.get(group)/ countAI);
@@ -198,11 +205,10 @@ class SubmittedAbstractAnalyser {
 		System.out.println("IDnum\tJ\tA\tB\tC\tD\tE\tF\tG\tH\tI\tML\tL_and_P\tKRR");
 		
 		
-		/*String[] folderNames = {"Prof_Hussein_Suleman", "Prof_Geoff_Nitschke", "Prof_Deshen_Moodley", "Prof_Maria_Keet", "Prof_Tommie_Meyer"};
+		String[] folderNames = {"Prof_Hussein_Suleman", "Prof_Geoff_Nitschke", "Prof_Deshen_Moodley", "Prof_Maria_Keet", "Prof_Tommie_Meyer"};
 		for(String profFolder : folderNames) {
 			openFiles(profFolder);
-		}*/
-     openFile();
+		}
 		
 		//print the proportion values for analysis
 		//Collections.sort(percents);
